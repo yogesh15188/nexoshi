@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./backend
+    container_name: nexoshi-backend
+    volumes:
+      - nexoshi-data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: nexoshi-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  nexoshi-data:

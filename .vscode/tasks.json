@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Run Backend (port 8001)",
+      "type": "shell",
+      "command": "python -m uvicorn app.main:app --host 127.0.0.1 --port 8001 --reload",
+      "options": { "cwd": "${workspaceFolder}\\backend" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "group": "dev" }
+    },
+    {
+      "label": "2. Run Frontend (port 3000)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}\\frontend" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "group": "dev" }
+    },
+    {
+      "label": "START FULL APP (backend + frontend)",
+      "dependsOn": ["1. Run Backend (port 8001)", "2. Run Frontend (port 3000)"],
+      "dependsOrder": "parallel",
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "DEPLOY production (port 8080)",
+      "type": "shell",
+      "command": "powershell -ExecutionPolicy Bypass -File deploy.ps1 -Port 8080",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ]
+}
