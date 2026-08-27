@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: nexoshi
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/metrics
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./nexoshi.db
